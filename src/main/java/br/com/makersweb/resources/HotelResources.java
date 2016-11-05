@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,11 +29,11 @@ import br.com.makersweb.utils.MakersWebUtils;
 @RestController
 @RequestMapping("/api")
 public class HotelResources {
-	
+
 	@Autowired
 	private HotelServices hotelServices;
-	
-	@RequestMapping(value = "/hotel", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/hotel", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> create(@RequestBody Hotel hotel) {
 		DefaultResponse response = new DefaultResponse();
 		try {
@@ -41,16 +42,18 @@ public class HotelResources {
 			response.setId(myHotel.getId());
 			response.setError(false);
 			response.setTypeError(MakersWebUtils.E_USER_SUCESS);
-			response.setMessage(MakersWebUtils.AjaxErro("Contato Cadastrado com sucesso!", MakersWebUtils.E_USER_SUCESS));
+			response.setMessage(
+					MakersWebUtils.AjaxErro("Contato Cadastrado com sucesso!", MakersWebUtils.E_USER_SUCESS));
 		} catch (BusinessException e) {
 			response.setError(true);
 			response.setTypeError(MakersWebUtils.E_USER_WARNING);
 			response.setMessage(MakersWebUtils.AjaxErro(e.getMessage(), MakersWebUtils.E_USER_WARNING));
 		}
-		
+
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
-	@RequestMapping(value = "/hotel", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/hotel", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<Hotel>> read() {
 		try {
 			return ResponseEntity.status(HttpStatus.OK).body(hotelServices.read());

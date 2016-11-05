@@ -33,16 +33,12 @@
 				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
 		</mvc:message-converters>
 	</mvc:annotation-driven>
-	
-	<mvc:resources mapping="/_cdn/**" location="/_cdn/" />
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/jsp/" />
 		<property name="suffix" value=".html" />
 	</bean>
-
-	<mvc:resources mapping="/**" location="/jsp/" />
 
 	<import resource="classpath:makersweb-spring-datasource.xml" />
 	<import resource="classpath:makersweb-services-context.xml" />
