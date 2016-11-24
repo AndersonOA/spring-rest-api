@@ -33,7 +33,7 @@ public class HotelResources {
 	@Autowired
 	private HotelServices hotelServices;
 
-	@RequestMapping(value = "/hotel", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/hotel", method = RequestMethod.POST, headers="Accept=application/json")
 	public ResponseEntity<?> create(@RequestBody Hotel hotel) {
 		DefaultResponse response = new DefaultResponse();
 		try {
