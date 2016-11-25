@@ -11,6 +11,11 @@
 		<security:intercept-url pattern="/**" access="isAuthenticated()" />
 		<security:http-basic /> 
 		<security:custom-filter ref="corsHandler" after="PRE_AUTH_FILTER" />
+		
+		<security:headers>
+			<security:frame-options policy="SAMEORIGIN" />
+			<security:hsts disabled="true"/>
+		</security:headers>
 	</security:http>
 	
 	<beans:bean id="corsHandler" class="br.com.makersweb.filter.CorsFilter" />
