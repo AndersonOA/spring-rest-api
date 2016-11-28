@@ -62,7 +62,7 @@ public class CorsFilter implements Filter {
 		// }
 		// chain.doFilter(req, res);
 
-		String origin = request.getHeader("Origin");
+		String origin = request.getHeader(ORIGIN);
 
 		if (origin != null && whitelist.contains(origin)) {
 			response.addHeader("Access-Control-Allow-Origin", origin);
